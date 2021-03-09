@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv sh
+
+touch /config/kopia_cron
+
+# convert crlf and add newline
+tr -d '\r' < /config/kopia_cron > /tmp/kopia_cron
+echo >> /tmp/kopia_cron
+
+# set crontab and echo
+crontab /tmp/kopia_cron
+crontab -l
