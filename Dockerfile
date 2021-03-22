@@ -3,6 +3,7 @@ RUN go get github.com/kopia/kopia
 
 FROM alpine:latest
 ARG PLATFORM_ARCH="amd64"
+ENV KOPIA_CHECK_FOR_UPDATES=false
 ENV RCLONE_CONFIG=/config/rclone.conf
 
 RUN apk update --no-cache && apk add --no-cache ca-certificates nano curl
