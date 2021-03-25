@@ -5,6 +5,10 @@ RUN make -C kopia install-noui
 
 FROM alpine:latest
 ARG PLATFORM_ARCH="amd64"
+
+ENV KOPIA_CONFIG_PATH=/config/kopia-config/repository.config
+ENV KOPIA_LOG_DIR=/config/kopia-config/logs
+ENV KOPIA_CACHE_DIRECTORY=/config/kopia-config/cache
 ENV KOPIA_CHECK_FOR_UPDATES=false
 ENV RCLONE_CONFIG=/config/rclone.conf
 

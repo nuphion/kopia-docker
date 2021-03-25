@@ -1,5 +1,7 @@
 #!/usr/bin/with-contenv sh
 
+kopia --version
+
 touch /config/kopia_cron
 
 # convert crlf and add newline
