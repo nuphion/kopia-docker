@@ -1,5 +1,7 @@
 FROM golang:alpine as build
-RUN go get github.com/kopia/kopia
+RUN apk update --no-cache && apk add --no-cache ca-certificates curl git make
+RUN git clone https://github.com/kopia/kopia.git
+RUN make -C kopia install-noui
 
 FROM alpine:latest
 ARG PLATFORM_ARCH="amd64"
@@ -13,7 +15,7 @@ RUN chmod +x /tmp/s6-overlay-amd64-installer && \
     /tmp/s6-overlay-amd64-installer / && \
     rm /tmp/s6-overlay-amd64-installer
 
-COPY --from=build /go/bin/kopia /usr/bin
+COPY --from=build /go/bin/kopia /usr/bin/kopia
 
 RUN curl -o /tmp/rclone.zip -L \
     "https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip" && \
